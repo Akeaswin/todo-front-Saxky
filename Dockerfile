@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run dist 
+RUN npm run build 
 # (หากใช้ Vite ให้เปลี่ยนคำว่า build เป็น dist ในบรรทัด COPY ด้านล่าง)
 
 # Stage 2: Serve with Nginx
