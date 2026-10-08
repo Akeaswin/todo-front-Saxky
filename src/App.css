@@ -29,3 +29,100 @@
 .small {
   font-size: 0.75rem;
 }
+
+[data-theme='dark'][class*='bg-slate-950'],
+[data-theme='dark'] [class*='bg-slate-950'] {
+  background-color: #08140d !important;
+}
+
+[data-theme='light'][class*='bg-slate-950'],
+[data-theme='light'] [class*='bg-slate-950'] {
+  background-color: #f2f8f3 !important;
+}
+
+[data-theme='light'] [class*='bg-slate-900/'] {
+  background-color: rgb(255 255 255 / 88%) !important;
+}
+
+[data-theme='light'] [class*='bg-slate-900/30'] {
+  background-color: #f8fafc !important;
+}
+
+[data-theme='light'] [class*='bg-slate-900']:not([class*='bg-slate-900/']) {
+  background-color: #fff !important;
+}
+
+[data-theme='light'] [class*='bg-slate-800'] {
+  background-color: #edf1f5 !important;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  color: #e2e8f0 !important;
+  caret-color: #86efac;
+}
+
+[data-theme='light'] input,
+[data-theme='light'] select,
+[data-theme='light'] textarea {
+  color: #18212f !important;
+  caret-color: #166534;
+}
+
+[data-theme='dark'] input::placeholder,
+[data-theme='dark'] textarea::placeholder {
+  color: #8fa49a !important;
+  opacity: 1;
+}
+
+[data-theme='light'] input::placeholder,
+[data-theme='light'] textarea::placeholder {
+  color: #718096 !important;
+  opacity: 1;
+}
+
+[data-theme='dark'] option {
+  color: #e2e8f0;
+  background-color: #102019;
+}
+
+[data-theme='light'] option {
+  color: #18212f;
+  background-color: #fff;
+}
+
+[data-theme='light'] [class*='text-slate-100'],
+[data-theme='light'] [class*='text-slate-200'] {
+  color: #18212f !important;
+}
+
+[data-theme='light'] [class*='text-slate-300'],
+[data-theme='light'] [class*='text-slate-400'] {
+  color: #526074 !important;
+}
+
+[data-theme='light'] [class*='text-slate-500'],
+[data-theme='light'] [class*='text-slate-600'] {
+  color: #718096 !important;
+}
+
+[data-theme='light'] [class~='text-white']:not(svg):not([class*='bg-indigo-']):not([class*='bg-rose-']) {
+  color: #18212f !important;
+}
+
+[data-theme='dark'] [class*='border-slate-'] {
+  border-color: #31543c !important;
+}
+
+[data-theme='light'] [class*='border-slate-'] {
+  border-color: #c5d9c9 !important;
+}
+
+[data-theme='light'] [class*='hover:bg-slate-']:hover {
+  background-color: #e7ecf2 !important;
+}
+
+[data-theme='light'] [class*='hover:text-slate-']:hover {
+  color: #18212f !important;
+}

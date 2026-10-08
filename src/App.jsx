@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import './App.css';
 
 import { 
   CheckCircle2, Circle, Trash2, Plus, Clock, Settings, RefreshCw, 
   AlertCircle, Sparkles, Server, Check, X, Search, Edit2, 
-  ArrowUpDown, LogOut, User as UserIcon, Lock, Mail, ArrowRight
+  ArrowUpDown, LogOut, User as UserIcon, Lock, Mail, ArrowRight, Sun, Moon
 } from 'lucide-react';
 
 
@@ -25,6 +26,7 @@ export default function App() {
   const [token, setToken] = useState(localStorage.getItem('taskflow_token') || null);
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('taskflow_user') || null);
   const [isAuthMode, setIsAuthMode] = useState('login'); // 'login' | 'register'
+  const [theme, setTheme] = useState(() => localStorage.getItem('taskflow_theme') || 'dark');
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
   const [authError, setAuthError] = useState('');
@@ -46,6 +48,12 @@ export default function App() {
   const [pendingApiUrl, setPendingApiUrl] = useState(getInitialApiUrl);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('taskflow_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark');
 
   const getHeaders = () => ({
     'Content-Type': 'application/json',
@@ -241,7 +249,7 @@ export default function App() {
 
   if (!token) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 selection:bg-indigo-500 selection:text-white">
+      <div data-theme={theme} className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 selection:bg-indigo-500 selection:text-white">
         
         {/* Settings button to adjust backend URL if needed */}
         <button
@@ -250,6 +258,15 @@ export default function App() {
           className="absolute top-6 right-6 p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition"
         >
           <Settings className="w-5 h-5" />
+        </button>
+
+        <button
+          onClick={toggleTheme}
+          title={`Switch to ${theme === 'dark' ? 'light' : 'night'} mode`}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'night'} mode`}
+          className="absolute top-6 right-16 p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition"
+        >
+          {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
         </button>
 
         <div className="w-full max-w-sm bg-slate-900/80 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-sm">
@@ -348,7 +365,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center py-8 px-4 sm:px-6 selection:bg-indigo-500 selection:text-white">
+    <div data-theme={theme} className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center py-8 px-4 sm:px-6 selection:bg-indigo-500 selection:text-white">
       <div className="w-full max-w-2xl flex flex-col gap-6">
         
         <header className="flex flex-col gap-4 border-b border-slate-800 pb-5">
@@ -364,6 +381,9 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              <button onClick={toggleTheme} title={`Switch to ${theme === 'dark' ? 'light' : 'night'} mode`} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'night'} mode`} className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition">
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
               <button onClick={() => fetchTodos(apiUrl)} title="Refresh" className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition">
                 <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-indigo-400' : ''}`} />
               </button>
